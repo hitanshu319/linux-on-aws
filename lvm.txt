@@ -1,0 +1,53 @@
+First create a new volume or HDD of any size lets say 2 GB then attach it to your AWS instance .
+Now connect to AWS instance .
+Now creating a partition in HDD 
+Step 1 --- PARTITION
+run a command --- 
+lsblk [This command will show all the HDD ]
+fdisk -l [This command will show external HDD]
+To create a partition run commannd 
+fdisk hdd name 
+Ex-   fdisk /dev/xvdf
+To make new partition 
+press n
+Press enter 3 times for default settings and at 4th step specify size of partition 
+as +400M 
+Press p or print to get info about partition
+To save partition press wq and enter
+ 
+Step 2----  FORMAT the HDD
+It means creating a hdd for storing info 
+NTFS(format of windows),HFS+(mac),XFS(linux)          (FAT,VFAT{formats accessible to all os})
+for formatting a HDD
+mkfs.xfs disk name
+mkfs.xfs /dev/xvdf1
+
+to check which formats are supoorted for formatting 
+mkfs.(double tab) 
+
+Step3 ------ Mounting a HDD
+Mounting is the attaching of an additional filesystem to the currently accessible filesystem of a computer. 
+A filesystem is a hierarchy of directories (also referred to as a directory tree) that is used to organize files on a computer 
+or storage media (e.g., a CDROM or floppy disk)
+
+First make dir in which we have to mount the HDD 
+mkdir /mnt/newvolume
+now Mount the HDD
+mount   /dev/xvdf1    /mnt/newvolume
+this will mount the HDD into newvolume dir
+To get the dir or place where the HDD is mounted 
+df -hT
+
+This mounting of HDD is one time process or its an temporary process so when we rebbot the instance we have to mount the HDD 
+again and have to repeat the mounting process again but only mounting process.
+
+To save the mounting permanently 
+vim /etc/fstab 
+write 
+HDD name and mounted place and add xfs  
+/dev/xvdf1  /mnt/newvolume  xfs
+:wq
+
+now mount -a 
+
+this will save mount permanently

@@ -1,0 +1,62 @@
+Web Server
+WEb server has two types 
+1. apache(most popular open source , free) 
+2. httpd
+To run our website or any HTML page we use Apache2 in  ubuntu and httpd in redhat.
+
+Lcal or free ip provider -----
+Wamp, Lamp, Mamp and Xampp are local servers that are used while developing PHP sites.
+Using these servers, programmers can test a website locally before they upload it to the main server. 
+This ensures that the new website doesn’t have any bugs or errors.
+
+    Lamp is for Linux.
+
+    Wamp is for Windows.
+
+    Mamp is for Mac OS X.
+
+    Xampp is  for x-os, apache, mysql, php , perl.
+
+NGINX --- first server 
+Apache runs on all kinds of Unix-like systems (e.g., Linux or BSD) and has full support for Microsoft Windows. 
+NGINX also runs on several modern Unix-like systems and has some support for Windows, 
+but its Windows performance is not as strong as that of other platforms.
+
+.ITS is best for .net users
+apache tomcat is java most powerfull streaming server.
+
+STEP 1 -----To Deploy any server
+ in ubuntu 
+ dpkg -l apache [This will show if package is installed or not]
+ in redhat
+ rpm -q httpd [This will show if package is installed or not.]
+ rpm -qc httpd [This will give version or details of pakage]
+if not install install the pakage 
+
+STEP 2 ---- Configure that server 
+In AWS instance add the rule in inbound group
+HTTP    TCP   80    0.0.0.0
+
+STEP 3 ---- Start the service
+
+systemctl start apache2/httpd
+systemctl status apache/httpd
+
+STEP 4 ---- HTML part
+cd /var/www/html
+save or copy or move  your html file here
+or make a file here
+touch a.html
+echo "<h1> hello world </h1>" >a.html
+
+then use your public ip 
+publicip/filename
+http://13.235.76.176/a.html
+
+---------------------------------------------------------------------------------
+
+***If the page is not loading check firewall setting
+systemctl status firewalld
+and them disable the firewall 
+systemctl disable firewalld
+now run the page.
